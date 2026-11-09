@@ -62,16 +62,24 @@ def construir_indice(recursos: pd.DataFrame) -> tuple:
 
 def crear_perfil(intereses: str, vectorizador: TfidfVectorizer) -> np.ndarray:
     """Devuelve un vector de una dimensión con el vocabulario del catálogo."""
-    # TODO 1: use transform sobre una lista con el texto de intereses.
-    # Convierta la salida a un array y devuelva su primera fila; no vuelva a ajustar.
-    raise NotImplementedError("Complete crear_perfil en motor.py.")
+    # Se usa transform y no fit_transform: así los intereses quedan en el mismo
+    # espacio que el catálogo (mismos 17 términos, mismo orden de columnas y mismos
+    # pesos IDF). transform espera una colección de documentos, por eso [intereses].
+    # Las palabras fuera del vocabulario se ignoran, de modo que u3 (vacío) y
+    # u4 ("zzxyz123") quedan como un vector de ceros.
+    matriz_perfil = vectorizador.transform([intereses])
+    # La salida es una matriz dispersa de 1 x 17; se pasa a array y se toma la
+    # única fila para tener un vector 1D, igual que cada fila de la matriz.
+    return matriz_perfil.toarray()[0]
 
 
 def calcular_puntuaciones(perfil: np.ndarray, matriz: np.ndarray) -> np.ndarray:
     """Devuelve una puntuación por fila del catálogo, en el mismo orden."""
-    # TODO 2: calcule cosine_similarity entre [perfil] y matriz.
-    # Devuelva un array de una dimensión, también cuando el perfil sea nulo.
-    raise NotImplementedError("Complete calcular_puntuaciones en motor.py.")
+    # cosine_similarity compara filas de matrices 2D. [perfil] convierte el vector
+    # en una matriz de una fila; el resultado tiene forma (1, n_recursos) y la
+    # fila 0 queda alineada con las filas de la matriz y del DataFrame.
+    # Si el perfil es nulo, sklearn no divide por cero y devuelve solo ceros.
+    return cosine_similarity([perfil], matriz)[0]
 
 
 def recomendar(
@@ -82,19 +90,37 @@ def recomendar(
     top_k: int = 3,
 ) -> list[dict]:
     """Devuelve hasta top_k resultados positivos usando construir_resultado."""
-    # TODO 3: obtenga las puntuaciones; ordene de mayor a menor y desempate por id.
-    # Incluya solo puntuaciones > 0 y como máximo top_k resultados.
-    # Use construir_resultado para incluir título, puntuación y explicación.
-    # Un perfil vacío o sin términos reconocidos debe producir la lista [].
-    raise NotImplementedError("Complete recomendar en motor.py.")
+    puntuaciones = calcular_puntuaciones(perfil, matriz)
+    ids = recursos["id"].tolist()
+    # Clave de orden: (-puntuacion, id). El signo negativo deja las puntuaciones de
+    # mayor a menor y, si hay empate, gana el id menor (R05 antes que R06).
+    # Se ordena con los valores sin redondear; el redondeo es solo para mostrar.
+    orden = sorted(range(len(ids)), key=lambda i: (-puntuaciones[i], ids[i]))
+    resultados = []
+    for indice in orden:
+        # Como la lista ya está ordenada, al llegar al primer valor <= 0 no quedan
+        # positivos. Así un perfil nulo devuelve [] y no se rellena con ceros.
+        if len(resultados) == top_k or puntuaciones[indice] <= 0:
+            break
+        resultados.append(construir_resultado(
+            indice, puntuaciones[indice], perfil, recursos, matriz, vectorizador
+        ))
+    return resultados
 
 
 def actualizar_perfil(perfil: np.ndarray, vector_recurso: np.ndarray) -> np.ndarray:
     """Actualiza el perfil cuando el usuario pulsa Me interesa sobre un recurso."""
-    # TODO 4: mezcle 0.4 del perfil previo y 0.6 del vector del recurso.
-    # Aplique normalize a una matriz de una fila y devuelva su primera fila.
-    # El valor 0.6 es un parámetro didáctico, no un resultado experimental.
-    raise NotImplementedError("Complete actualizar_perfil en motor.py.")
+    # alpha es el peso de la interacción nueva. 0.6 es el valor didáctico pedido
+    # en la guía para que el cambio se note; no viene de un experimento.
+    alpha = 0.6
+    perfil = np.asarray(perfil, dtype=float)
+    vector_recurso = np.asarray(vector_recurso, dtype=float)
+    # El perfil anterior conserva el 40 %, por eso no se olvidan los intereses previos.
+    mezcla = (1 - alpha) * perfil + alpha * vector_recurso
+    # normalize trabaja por filas: [mezcla] es una matriz de una fila. Con norma L2
+    # el perfil vuelve a tener largo 1, igual que las filas TF-IDF, y su magnitud
+    # no crece con cada actualización (el coseno solo usa la dirección).
+    return normalize([mezcla], norm="l2")[0]
 
 
 def obtener_indice(recursos: pd.DataFrame, recurso_id: str) -> int:
