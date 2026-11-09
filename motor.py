@@ -118,8 +118,9 @@ def actualizar_perfil(perfil: np.ndarray, vector_recurso: np.ndarray) -> np.ndar
     # El perfil anterior conserva el 40 %, por eso no se olvidan los intereses previos.
     mezcla = (1 - alpha) * perfil + alpha * vector_recurso
     # normalize trabaja por filas: [mezcla] es una matriz de una fila. Con norma L2
-    # el perfil vuelve a tener largo 1, igual que las filas TF-IDF, y su magnitud
-    # no crece con cada actualización (el coseno solo usa la dirección).
+    # el perfil vuelve a tener largo 1, igual que las filas TF-IDF, y en la próxima
+    # actualización el 0.4 y el 0.6 se aplican sobre vectores de la misma magnitud.
+    # El coseno solo usa la dirección, así que esto no altera el ranking actual.
     return normalize([mezcla], norm="l2")[0]
 
 
