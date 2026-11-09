@@ -73,6 +73,19 @@ Usuario activo: u3
 Perfil: {}
 Historial: Sin interacciones.
 r: recomendar | c: catálogo | m: me interesa | u: cambiar usuario | s: salir
+Opción: ID de cualquier recurso del catálogo: Perfil anterior: {}
+Perfil actualizado: {'componentes': 0.657512, 'interfaces': 0.564679, 'angular': 0.498813}
+1. R07 | Componentes e interfaces en Angular | similitud=1.0000
+   Términos compartidos: angular, componentes, interfaces.
+2. R08 | Formularios e interfaces en Angular | similitud=0.5677
+   Términos compartidos: angular, interfaces.
+3. R09 | Consumir una API desde Angular | similitud=0.3087
+   Términos compartidos: angular.
+
+Usuario activo: u3
+Perfil: {'componentes': 0.657512, 'interfaces': 0.564679, 'angular': 0.498813}
+Historial: [{'numero': 1, 'accion': 'Me interesa', 'recurso': 'R07'}]
+r: recomendar | c: catálogo | m: me interesa | u: cambiar usuario | s: salir
 Opción: u1: Usuario con interés en datos y Python
 u2: Usuario con interés en interfaces Angular
 u3: Usuario sin intereses declarados
