@@ -1,0 +1,85 @@
+u1: Usuario con interés en datos y Python
+u2: Usuario con interés en interfaces Angular
+u3: Usuario sin intereses declarados
+u4: Usuario con términos fuera del vocabulario
+Usuario: El estado se conserva durante esta ejecución. Reiniciar restaura el JSON inicial.
+
+Usuario activo: u1
+Perfil: {'pandas': 0.753247, 'datos': 0.465091, 'python': 0.465091}
+Historial: Sin interacciones.
+r: recomendar | c: catálogo | m: me interesa | u: cambiar usuario | s: salir
+Opción: 1. R02 | Análisis de datos con Pandas | similitud=1.0000
+   Términos compartidos: datos, pandas, python.
+2. R12 | Conectar Python con datos SQL | similitud=0.4965
+   Términos compartidos: datos, python.
+3. R03 | Gráficos con Python | similitud=0.4326
+   Términos compartidos: datos, python.
+
+Usuario activo: u1
+Perfil: {'pandas': 0.753247, 'datos': 0.465091, 'python': 0.465091}
+Historial: Sin interacciones.
+r: recomendar | c: catálogo | m: me interesa | u: cambiar usuario | s: salir
+Opción: ID de cualquier recurso del catálogo: No existe el recurso R99.
+
+Usuario activo: u1
+Perfil: {'pandas': 0.753247, 'datos': 0.465091, 'python': 0.465091}
+Historial: Sin interacciones.
+r: recomendar | c: catálogo | m: me interesa | u: cambiar usuario | s: salir
+Opción: ID de cualquier recurso del catálogo: Perfil anterior: {'pandas': 0.753247, 'datos': 0.465091, 'python': 0.465091}
+Perfil actualizado: {'python': 0.637116, 'api': 0.446269, 'web': 0.446269, 'pandas': 0.376477, 'datos': 0.232455}
+1. R04 | API web con Python | similitud=0.8752
+   Términos compartidos: api, python, web.
+2. R02 | Análisis de datos con Pandas | similitud=0.6880
+   Términos compartidos: datos, pandas, python.
+3. R09 | Consumir una API desde Angular | similitud=0.4958
+   Términos compartidos: api, web.
+
+Usuario activo: u1
+Perfil: {'python': 0.637116, 'api': 0.446269, 'web': 0.446269, 'pandas': 0.376477, 'datos': 0.232455}
+Historial: [{'numero': 1, 'accion': 'Me interesa', 'recurso': 'R04'}]
+r: recomendar | c: catálogo | m: me interesa | u: cambiar usuario | s: salir
+Opción: u1: Usuario con interés en datos y Python
+u2: Usuario con interés en interfaces Angular
+u3: Usuario sin intereses declarados
+u4: Usuario con términos fuera del vocabulario
+Usuario: 
+Usuario activo: u2
+Perfil: {'componentes': 0.657512, 'interfaces': 0.564679, 'angular': 0.498813}
+Historial: Sin interacciones.
+r: recomendar | c: catálogo | m: me interesa | u: cambiar usuario | s: salir
+Opción: 1. R07 | Componentes e interfaces en Angular | similitud=1.0000
+   Términos compartidos: angular, componentes, interfaces.
+2. R08 | Formularios e interfaces en Angular | similitud=0.5677
+   Términos compartidos: angular, interfaces.
+3. R09 | Consumir una API desde Angular | similitud=0.3087
+   Términos compartidos: angular.
+
+Usuario activo: u2
+Perfil: {'componentes': 0.657512, 'interfaces': 0.564679, 'angular': 0.498813}
+Historial: Sin interacciones.
+r: recomendar | c: catálogo | m: me interesa | u: cambiar usuario | s: salir
+Opción: u1: Usuario con interés en datos y Python
+u2: Usuario con interés en interfaces Angular
+u3: Usuario sin intereses declarados
+u4: Usuario con términos fuera del vocabulario
+Usuario: 
+Usuario activo: u3
+Perfil: {}
+Historial: Sin interacciones.
+r: recomendar | c: catálogo | m: me interesa | u: cambiar usuario | s: salir
+Opción: No hay coincidencias positivas. Declare intereses presentes en el catálogo.
+
+Usuario activo: u3
+Perfil: {}
+Historial: Sin interacciones.
+r: recomendar | c: catálogo | m: me interesa | u: cambiar usuario | s: salir
+Opción: u1: Usuario con interés en datos y Python
+u2: Usuario con interés en interfaces Angular
+u3: Usuario sin intereses declarados
+u4: Usuario con términos fuera del vocabulario
+Usuario: 
+Usuario activo: u1
+Perfil: {'python': 0.637116, 'api': 0.446269, 'web': 0.446269, 'pandas': 0.376477, 'datos': 0.232455}
+Historial: [{'numero': 1, 'accion': 'Me interesa', 'recurso': 'R04'}]
+r: recomendar | c: catálogo | m: me interesa | u: cambiar usuario | s: salir
+Opción: 

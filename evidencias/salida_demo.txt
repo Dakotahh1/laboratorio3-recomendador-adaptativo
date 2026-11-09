@@ -1,0 +1,27 @@
+T1: Cumple | Dos perfiles iniciales sobre el mismo catálogo
+T2: Cumple | u1 indica Me interesa sobre R04
+T3: Cumple | La interacción de u1 no modifica a u2
+T4: Cumple | Perfil vacío y términos fuera del vocabulario
+
+u1 antes de valorar R04:
+1. R02 | Análisis de datos con Pandas | similitud=1.0000
+   Términos compartidos: datos, pandas, python.
+2. R12 | Conectar Python con datos SQL | similitud=0.4965
+   Términos compartidos: datos, python.
+3. R03 | Gráficos con Python | similitud=0.4326
+   Términos compartidos: datos, python.
+
+u1 después de valorar R04:
+1. R04 | API web con Python | similitud=0.8752
+   Términos compartidos: api, python, web.
+2. R02 | Análisis de datos con Pandas | similitud=0.6880
+   Términos compartidos: datos, pandas, python.
+3. R09 | Consumir una API desde Angular | similitud=0.4958
+   Términos compartidos: api, web.
+
+T4:
+u3: No hay coincidencias positivas. Declare intereses presentes en el catálogo.
+u4: No hay coincidencias positivas. Declare intereses presentes en el catálogo.
+
+Evidencias guardadas en: evidencias
+Revise los archivos e interprete los resultados en README.md.
